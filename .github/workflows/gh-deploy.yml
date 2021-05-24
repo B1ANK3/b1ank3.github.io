@@ -9,9 +9,10 @@ jobs:
     runs-on: ubuntu-latest
     steps:
       - name: Setup Node.js for use with actions
-        uses: actions/setup-node@v1.1.0
+        uses: actions/setup-node@v2
         with:
-          version: 12.x
+          node-version: '14'
+
       - name: Checkout branch
         uses: actions/checkout@v2
 
@@ -21,4 +22,4 @@ jobs:
       - name: Run deploy script
         run: |
           git config user.name "B1ANK3" && git config user.email "44206247+B1ANK3@users.noreply.github.com"
-          npm run gh-pages-deploy
+          npm run deploy
