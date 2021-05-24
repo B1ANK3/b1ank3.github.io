@@ -14,27 +14,6 @@ module.exports = {
                 return options
             })
     },
-    // pages: {
-    // 	'index': {
-    // 		entry: './src/index/main.ts',
-    // 		template: './public/index.html',
-    // 		title: 'CSGO Cardinal',
-    // 		chunks: ['chunk-vendors', 'chunk-common', 'index']
-    // 	},
-    // 	'popup': {
-    // 		entry: './src/popup/main.ts',
-    // 		template: './public/index.html',
-    // 		title: 'Popup',
-    // 		chunks: ['chunk-vendors', 'chunk-common', 'popup']
-    // 	}
-    // },
-    pluginOptions: {
-        // browserExtension: {
-        // 	componentOptions: {
-        // 		background: {
-        // 			entry: './src/background/main.ts'
-        // 		}
-        // 	}
-        // }
-    }
+    pages: {},
+    pluginOptions: {}
 }
