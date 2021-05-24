@@ -1,7 +1,6 @@
 
 
 module.exports = {
-    publicPath: '/b1ank3.github.io/',
     configureWebpack: config => {
         config['devtool'] = 'inline-source-map'
     },
@@ -14,6 +13,5 @@ module.exports = {
                 return options
             })
     },
-    pages: {},
     pluginOptions: {}
 }
