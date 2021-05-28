@@ -7,8 +7,10 @@
       make a time available to play.
     </p>
     <p class="lead">
-      <a href="#" class="btn btn-lg btn-secondary fw-bold border-white bg-white"
-        >Start</a
+      <router-link
+        to="/dnd"
+        class="btn btn-lg btn-secondary fw-bold border-white bg-white"
+        >DnD</router-link
       >
     </p>
   </main>
