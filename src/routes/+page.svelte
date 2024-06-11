@@ -2,6 +2,11 @@
 	import { page } from '$app/stores';
 </script>
 
+<svelte:head>
+	<title>B1ANK3</title>
+	<meta name="description" content="A 200 response page for my github pages" />
+</svelte:head>
+
 <div class="container">
 	<div class="status">{$page.status}</div>
 </div>
