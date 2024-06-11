@@ -1,0 +1,27 @@
+<script lang="ts">
+	import { page } from '$app/stores';
+</script>
+
+<div class="container">
+	<div class="status">{$page.status}</div>
+</div>
+
+<style>
+	.container {
+		width: 100vw;
+		height: 100vh;
+		display: flex;
+		justify-content: center;
+		align-items: center;
+
+		background-color: #282828;
+	}
+
+	.status {
+		font-family: 'Roboto Mono', monospace;
+		font-style: normal;
+		font-size: 12em;
+		align-content: center;
+		color: #a9b665;
+	}
+</style>
