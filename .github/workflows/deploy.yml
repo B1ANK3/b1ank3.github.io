@@ -3,6 +3,7 @@ name: SvelteKit SSG Deploy to GH Pages
 on:
   push:
     branches: ['stable']
+  workflow_dispatch:
 
 jobs:
   build_site:
@@ -41,6 +42,7 @@ jobs:
     runs-on: ubuntu-latest
 
     permissions:
+      contents: read
       pages: write
       id-token: write
 
