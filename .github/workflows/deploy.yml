@@ -28,7 +28,9 @@ jobs:
 
       - name: build
         env:
-          BASE_PATH: '/${{ github.event.repository.name }}'
+          # Using '' for the path of root website
+          # '/${{ github.event.repository.name }}'
+          BASE_PATH: ''
         run: |
           pnpm run build
 
