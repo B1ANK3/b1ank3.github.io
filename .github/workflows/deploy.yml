@@ -1,58 +1,58 @@
 name: SvelteKit SSG Deploy to GH Pages
 
 on:
-  push:
-    branches: ['stable']
-  workflow_dispatch:
+    push:
+        branches: ['stable']
+    workflow_dispatch:
 
 jobs:
-  build_site:
-    runs-on: ubuntu-latest
-    steps:
-      - name: Checkout
-        uses: actions/checkout@v4
+    build_site:
+        runs-on: ubuntu-latest
+        steps:
+            - name: Checkout
+              uses: actions/checkout@v4
 
-      - name: Install pnpm
-        uses: pnpm/action-setup@v3
-        with:
-          version: 9
+            - name: Install pnpm
+              uses: pnpm/action-setup@v3
+              with:
+                  version: 9
 
-      - name: Install Node
-        uses: actions/setup-node@v4
-        with:
-          node-version: 22
-          cache: pnpm
+            - name: Install Node
+              uses: actions/setup-node@v4
+              with:
+                  node-version: 22
+                  cache: pnpm
 
-      - name: Install dependencies
-        run: pnpm i
+            - name: Install dependencies
+              run: pnpm i
 
-      - name: build
-        env:
-          # Using '' for the path of root website
-          # '/${{ github.event.repository.name }}'
-          BASE_PATH: ''
-        run: |
-          pnpm run build
+            - name: build
+              env:
+                  # Using '' for the path of root website
+                  # '/${{ github.event.repository.name }}'
+                  BASE_PATH: ''
+              run: |
+                  pnpm run build
 
-      - name: Upload artifacts
-        uses: actions/upload-pages-artifact@v3
-        with:
-          path: 'build/'
+            - name: Upload artifacts
+              uses: actions/upload-pages-artifact@v3
+              with:
+                  path: 'build/'
 
-  deploy:
-    needs: build_site
-    runs-on: ubuntu-latest
+    deploy:
+        needs: build_site
+        runs-on: ubuntu-latest
 
-    permissions:
-      contents: read
-      pages: write
-      id-token: write
+        permissions:
+            contents: read
+            pages: write
+            id-token: write
 
-    environment:
-      name: github-pages
-      url: ${{ steps.deployment.outputs.page_url }}
+        environment:
+            name: github-pages
+            url: ${{ steps.deployment.outputs.page_url }}
 
-    steps:
-      - name: Deploy
-        id: deployment
-        uses: actions/deploy-pages@v4
+        steps:
+            - name: Deploy
+              id: deployment
+              uses: actions/deploy-pages@v4
