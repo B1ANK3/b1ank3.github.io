@@ -1,5 +1,5 @@
 <script lang="ts">
-    import { page } from '$app/stores'
+    import { page } from '$app/state'
 </script>
 
 <svelte:head>
@@ -7,26 +7,8 @@
     <meta name="description" content="An error occurred with the site" />
 </svelte:head>
 
-<div class="container">
-    <div class="status">{$page.status}</div>
+<div class="justify-center content-center flex bg-[#282828] size-screen">
+    <div class="text-[12em] font-mono font-[Roboto_Mono] content-center text-[#ea6962]">
+        {page.status}
+    </div>
 </div>
-
-<style>
-    .container {
-        width: 100vw;
-        height: 100vh;
-        display: flex;
-        justify-content: center;
-        align-items: center;
-
-        background-color: #282828;
-    }
-
-    .status {
-        font-family: 'Roboto Mono', monospace;
-        font-style: normal;
-        font-size: 12em;
-        align-content: center;
-        color: #ea6962;
-    }
-</style>
