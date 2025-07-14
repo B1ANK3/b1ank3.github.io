@@ -4,11 +4,18 @@
         <meta charset="utf-8" />
         <link rel="icon" href="%sveltekit.assets%/favicon.png" />
         <meta name="viewport" content="width=device-width, initial-scale=1" />
+
+        <!-- Umami tracking -->
         <script
             defer
             src="https://cloud.umami.is/script.js"
             data-website-id="bf9fde71-3337-47f2-85f9-cc3ad8349a82"
         ></script>
+
+        <!-- UnoCSS global styles -->
+        %unocss-svelte-scoped.global%
+
+        <!-- Svelte head -->
         %sveltekit.head%
     </head>
 
