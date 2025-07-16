@@ -1,6 +1,5 @@
 <script lang="ts">
     import { page } from '$app/state'
-    import { NavigationMenu } from 'bits-ui'
 </script>
 
 <svelte:head>
@@ -8,8 +7,8 @@
     <meta name="description" content="A {page.status} response page for my github pages" />
 </svelte:head>
 
-<div class="justify-center content-center flex bg-[#282828] size-screen">
-    <div class="text-[12em] font-mono font-[Roboto_Mono] content-center text-[#a9b665]">
+<div class="flex h-screen w-screen content-center justify-center">
+    <div class="content-center font-[Roboto_Mono] font-mono text-[12em] text-(--green) select-none">
         {page.status}
     </div>
 </div>
