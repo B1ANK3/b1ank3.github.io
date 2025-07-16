@@ -1,39 +1,34 @@
 <script lang="ts">
-    import './style.css'
+    import '../app.css'
+    import '@unocss/reset/normalize.css'
     import RobotoMono from '$lib/fonts/Roboto-mono.woff2'
-
-    import { NavigationMenu, Dialog, Command } from 'bits-ui'
+    // import { Command, Dialog } from 'bits-ui'
+    import * as Command from '$lib/components/ui/command/index'
+    import { ModeWatcher } from 'mode-watcher'
+    import * as NavigationMenu from '$lib/components/ui/navigation-menu/index'
 
     let { children } = $props()
 
-    let nav_links: { href: string; text: string }[] = [
+    let nav_links: { index: number; href: string; text: string }[] = [
+        { index: 0, href: '/', text: 'Home' },
+        { index: 1, href: '/blog', text: 'Blog' },
         {
-            href: '/',
-            text: 'Home'
-        },
-        {
-            href: '/blog',
-            text: 'Blog'
-        },
-        {
+            index: 2,
             href: '/projects',
             text: 'Projects'
         },
-        {
-            href: '/about',
-            text: 'About'
-        }
+        { index: 3, href: '/about', text: 'About' }
     ]
 
-    let search_open = $state(false)
-    let search_value = $state('')
-
-    function handleKeydown(e: KeyboardEvent) {
+    function onkeydown(e: KeyboardEvent) {
         if (e.key === 'e' && (e.metaKey || e.ctrlKey)) {
             e.preventDefault()
-            search_open = !search_open
+            open = !open
         }
     }
+
+    let open = $state(false)
+    let value = $state('')
 </script>
 
 <svelte:head>
@@ -41,55 +36,32 @@
     <link rel="preload" as="font" href={RobotoMono} type="font/woff2" crossorigin="" />
 </svelte:head>
 
-<svelte:document onkeydown={handleKeydown} />
+<svelte:document {onkeydown} />
 
-<NavigationMenu.Root class="flex w-full justify-center fixed">
-    <NavigationMenu.List class="group flex list-none item-center justify-center p-1">
-        {#each nav_links as { href, text }}
-            <NavigationMenu.Item>
-                <NavigationMenu.Link
-                    {href}
-                    class="hover:text-accent-foreground group inline-flex h-8 w-max items-center justify-center px-4 py-2 bg-transparent"
-                    >{text}</NavigationMenu.Link
-                >
-            </NavigationMenu.Item>
-        {/each}
-        <NavigationMenu.Indicator>
-            <div class="bg-border relative top-[70%] size-2.5 rounded-tl-[2px]"></div>
-        </NavigationMenu.Indicator>
-    </NavigationMenu.List>
-</NavigationMenu.Root>
+<ModeWatcher />
 
-<Dialog.Root bind:open={search_open}>
-    <Dialog.Trigger>Open Command Palette</Dialog.Trigger>
-    <Dialog.Portal>
-        <Dialog.Overlay />
-        <Dialog.Content>
-            <Dialog.Title>Command Palette</Dialog.Title>
-            <Dialog.Description>Search for stuff</Dialog.Description>
-            <!-- Command goes here -->
+<Command.Dialog bind:open>
+    <Command.Input bind:value placeholder="Type a command or search..." />
+    <Command.List>
+        <Command.Empty>No results found.</Command.Empty>
+        <Command.Group heading="Suggestions">
+            <Command.Item>Calendar</Command.Item>
+            <Command.Item>Search Emoji</Command.Item>
+            <Command.Item>Calculator</Command.Item>
+        </Command.Group>
+    </Command.List>
+</Command.Dialog>
 
-            <Command.Root
-                class="flex size-full"
-                placeholder="Search for something..."
-                bind:value={search_value}
-            >
-                <Command.Input />
-                <Command.List>
-                    <Command.Viewport>
-                        <Command.Empty>No results found.</Command.Empty>
-                    </Command.Viewport>
-                </Command.List>
-            </Command.Root>
-        </Dialog.Content>
-    </Dialog.Portal>
-</Dialog.Root>
+<div class="align-center fixed flex w-screen justify-center">
+    <NavigationMenu.Root>
+        <NavigationMenu.List>
+            {#each nav_links as { index, href, text } (index)}
+                <NavigationMenu.Item class="hover:bg-muted">
+                    <NavigationMenu.Link {href}>{text}</NavigationMenu.Link>
+                </NavigationMenu.Item>
+            {/each}
+        </NavigationMenu.List>
+    </NavigationMenu.Root>
+</div>
 
-{@render children()}
-
-<style>
-    @font-face {
-        font-family: 'Roboto Mono';
-        src: url('$lib/fonts/Roboto-mono.woff2') format('woff2');
-    }
-</style>
+{@render children?.()}

@@ -1,4 +1,3 @@
-// import adapter from '@sveltejs/adapter-auto';
 import adapter from '@sveltejs/adapter-static'
 import { vitePreprocess } from '@sveltejs/vite-plugin-svelte'
 import UnoCSS from '@unocss/svelte-scoped/preprocess'
@@ -11,10 +10,18 @@ const config = {
     // for more information about preprocessors
     preprocess: [
         vitePreprocess(),
+        // Only using unocss for css icons
         UnoCSS({
             combine: prod
         })
     ],
+
+    // Remove annoying warning with unocss using only globals
+    onwarn(warning, handle) {
+        if (warning.code !== 'vite-plugin-svelte-css-no-scopable-elements') {
+            handle(warning)
+        }
+    },
 
     kit: {
         // adapter-auto only supports some environments, see https://kit.svelte.dev/docs/adapter-auto for a list.
